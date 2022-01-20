@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PingPongClient
 {
-    public class MyContractResolver : DefaultContractResolver
+    public class AllFieldsContractResolver : DefaultContractResolver
     {
         protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
         {

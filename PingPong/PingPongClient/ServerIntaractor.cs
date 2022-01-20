@@ -52,7 +52,7 @@ namespace PingPongClient
 
                 var person = new Person(name, int.Parse(age));
 
-                var settings = new JsonSerializerSettings() { ContractResolver = new MyContractResolver() };
+                var settings = new JsonSerializerSettings() { ContractResolver = new AllFieldsContractResolver() };
                 var msg = JsonConvert.SerializeObject(person, settings);
 
                 string answer = Client.IntaractWithServer(msg);
