@@ -8,7 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BasicEchoServer\BasicEchoServer.csproj" />
+    <ProjectReference Include="..\IOCommons\IOCommons.csproj" />
+    <ProjectReference Include="..\SocketClient\SocketClient.csproj" />
   </ItemGroup>
 
 </Project>
