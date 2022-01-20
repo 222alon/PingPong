@@ -21,16 +21,12 @@ namespace BasicEchoServer
 
             var localEndPoint = new IPEndPoint(ipAddress, Port);
 
-            var listener = new Socket(ipAddress.AddressFamily,
-                        SocketType.Stream, ProtocolType.Tcp);
-
-            listener.Bind(localEndPoint); 
-
-            listener.Listen();
+            var tcpListener = new TcpListener(localEndPoint);
+            tcpListener.Start();
 
             while (true)
             {
-                Socket client = listener.Accept();
+                Socket client = tcpListener.AcceptSocket();
 
                 ExecuteEchoConnection(client);
             }
