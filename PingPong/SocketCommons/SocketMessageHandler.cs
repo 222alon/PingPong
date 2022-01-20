@@ -31,7 +31,7 @@ namespace SocketCommons
         {
             VerifyConnection();
 
-            byte[] msg = Encoding.ASCII.GetBytes($"{data}<EOF>");
+            byte[] msg = Encoding.UTF8.GetBytes($"{data}<EOF>");
 
             Socket.Send(msg);
         }
@@ -48,7 +48,7 @@ namespace SocketCommons
             {
                 bytes = new byte[1024];
                 int bytesRec = Socket.Receive(bytes);
-                data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                data += Encoding.UTF8.GetString(bytes, 0, bytesRec);
                 if (data.IndexOf("<EOF>") > -1)
                 {
                     data = data[..(data.Length - 5)];

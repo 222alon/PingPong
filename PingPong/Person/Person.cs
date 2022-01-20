@@ -1,4 +1,4 @@
-﻿namespace Person
+﻿namespace Persons
 {
     public class Person
     {

@@ -1,9 +1,13 @@
 ﻿using IOCommons.Inputs.Abstracts;
 using IOCommons.Outputs.Abstracts;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Persons;
 using SocketClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,19 +30,52 @@ namespace PingPongClient
 
         public void Start()
         {
+
+
             while (true)
             {
-                string msg = Input.ReadLine();
+                Output.WriteLine("Enter person name:");
+                string name = Input.ReadLine();
 
-                if (msg == "exit")
+                if (name == "exit")
                 {
                     break;
                 }
 
+                Output.WriteLine("Enter person age:");
+                string age = Input.ReadLine();
+
+                if (age == "exit")
+                {
+                    break;
+                }
+
+                var person = new Person(name, int.Parse(age));
+
+                var settings = new JsonSerializerSettings() { ContractResolver = new MyContractResolver() };
+                var msg = JsonConvert.SerializeObject(person, settings);
+
                 string answer = Client.IntaractWithServer(msg);
 
-                Output.WriteLine(answer);
+                var responsePerson = JsonConvert.DeserializeObject<Person>(answer, settings);
+
+
+
+                Output.WriteLine(responsePerson.ToString());
             }
         }
+    }
+    public class MyContractResolver : DefaultContractResolver
+    {
+        protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
+        {
+            var props = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                            .Select(p => base.CreateProperty(p, memberSerialization))
+                        .Union(type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                                   .Select(f => base.CreateProperty(f, memberSerialization)))
+                        .ToList();
+            props.ForEach(p => { p.Writable = true; p.Readable = true; });
+            return props;
+        } 
     }
 }

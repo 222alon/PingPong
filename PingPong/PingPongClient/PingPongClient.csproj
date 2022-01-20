@@ -8,7 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\IOCommons\IOCommons.csproj" />
+    <ProjectReference Include="..\Person\Person.csproj" />
     <ProjectReference Include="..\SocketClient\SocketClient.csproj" />
   </ItemGroup>
 
