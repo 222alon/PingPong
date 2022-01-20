@@ -18,7 +18,7 @@ namespace SocketClient
             TcpClient = new TcpClient();
 
             TcpClient.Connect(localEndPoint);
-            
+
             _handler = new SocketMessageHandler(TcpClient.Client);
         }
 
