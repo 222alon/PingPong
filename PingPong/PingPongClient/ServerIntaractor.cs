@@ -1,15 +1,8 @@
 ﻿using IOCommons.Inputs.Abstracts;
 using IOCommons.Outputs.Abstracts;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Persons;
 using SocketClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PingPongClient
 {
@@ -30,8 +23,6 @@ namespace PingPongClient
 
         public void Start()
         {
-
-
             while (true)
             {
                 Output.WriteLine("Enter person name:");
